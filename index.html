@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <title>API Calls</title>
+        <link rel="stylesheet" href="newstyle.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
+    <body>
+        <div>
+          <button onclick="resp()">Click</button>
+        </div>
+        <div id="name"></div>
+
+        
+        <script>
+           const resp = async () => {
+            const response = await fetch("https://reqres.in/api/users?page=2",{
+                method: "GET",
+            });
+            const detailListResponse = await response.json();
+            console.log(detailListResponse, 'DATA')
+            const detailList = detailListResponse.data;
+            for (let i = 0; i < detailList.length; i++){
+                let li = document.createElement("li");
+                li.innerHTML = detailList[i].email
+                document.getElementById('name').appendChild(li)
+            }
+            for (let i = 0; i < detailList.length; i++){
+                let li = document.createElement("li");
+                li.innerHTML = detailList[i].first_name
+                document.getElementById('name').appendChild(li)
+            }
+            for (let i = 0; i < detailList.length; i++){
+                let li = document.createElement("li");
+                li.innerHTML = detailList[i].last_name
+                document.getElementById('name').appendChild(li)
+            }
+            for (let i = 0; i < detailList.length; i++){
+                let li = document.createElement("li");
+                li.innerHTML = detailList[i].avatar
+                document.getElementById('name').appendChild(li)
+            }
+            
+           }; 
+
+        </script>
+    </body>
+</html>
